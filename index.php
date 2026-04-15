@@ -230,7 +230,7 @@
                 <h1>LANDHUB KENYA</h1>
                 <p>Connecting people to their dream property with transparency.</p>
                 <div class="logo">
-                    <img src="landhub logo.PNG" alt="LandHub Logo">
+                    <img src="landhub logo.png" alt="LandHub Logo">
                 </div>
             </header>
         </div>
