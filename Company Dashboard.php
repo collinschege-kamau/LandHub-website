@@ -1,11 +1,12 @@
 <?php
 session_start();
-
+/*
 // 1. Security Check
 if (!isset($_SESSION['user_id'])) {
     header("Location: directing.html");
     exit();
 }
+*/
 
 // Database Connection
 $servername="sql112.infinityfree.com";
