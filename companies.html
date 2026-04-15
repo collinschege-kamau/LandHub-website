@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Land Selling Companies in Kenya | Directory</title>
+    <style>
+        /* --- THE BACKGROUND --- */
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                        url('pexels-altaf-shah-3143825-8314513.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            /* We remove the global 'color: white' so text inside white cards stays dark */
+        }
+        :root {
+            --primary-color: #000102;
+            --secondary-color: #e67e22;
+            --accent-color: #27ae60;
+            --bg-color: #f4f4f9;
+            --text-muted: #7f8c8d;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: var(--bg-color); 
+            margin: 0; 
+            padding: 40px 20px; 
+            color: rgb(0, 0, 0)
+        }
+
+        h1 { 
+            text-align: center; 
+            color: var(--primary-color); 
+            margin-bottom: 40px;
+        }
+
+        .grid-container { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 25px; 
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .company-card { 
+            background: #fff; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+            padding: 25px; 
+            text-align: center; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Keeps button at the bottom */
+        }
+
+        .company-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 12px 20px rgba(0,0,0,0.12);
+        }
+
+        .company-card h2 { 
+            color: var(--secondary-color); 
+            font-size: 1.3em; 
+            margin: 0 0 15px 0; 
+        }
+
+        .company-card p { 
+            font-size: 0.95em; 
+            color: var(--text-muted); 
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .btn { 
+            display: inline-block; 
+            padding: 12px 24px; 
+            background-color: var(--accent-color); 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 6px; 
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .btn:hover { 
+            background-color: #219150; 
+        }
+
+        .back-link {
+            padding: 12px 24px; 
+            background-color: rgb(0, 128, 255); 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 6px; 
+            font-weight: bold;
+            display: block;
+            text-align: center;
+            margin-top: 50px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);  
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 150px;
+            
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <h1>Trusted Land Selling Companies in Kenya</h1>
+
+        <div class="grid-container">
+            <article class="company-card">
+                <div>
+                    <h2>Username Properties Ltd.</h2>
+                    <p>Ranked #1 for affordability and transparency. Offers value-added plots in high-growth areas like Juja, Nakuru, and Ngong.</p>
+                </div>
+                <a href="https://www.usernameproperties.com/" target="_blank" rel="noopener noreferrer" class="btn">Visit Website</a>
+            </article>
+
+            <article class="company-card">
+                <div>
+                    <h2>Optiven Limited</h2>
+                    <p>Known for eco-friendly gated communities and large-scale land banking projects across Kenya, including Kiambu and Kitengela.</p>
+                </div>
+                <a href="https://www.optiven.co.ke" target="_blank" rel="noopener noreferrer" class="btn">Visit Website</a>
+            </article>
+
+            <article class="company-card">
+                <div>
+                    <h2>AMG Realtors</h2>
+                    <p>Specializes in affordable plots with ready title deeds in strategic locations like Nanyuki, Naivasha, and Matuu.</p>
+                </div>
+                <a href="https://amgrealtors.com/" target="_blank" rel="noopener noreferrer" class="btn">Visit Website</a>
+            </article>
+
+            <article class="company-card">
+                <div>
+                    <h2>Fanaka Real Estate</h2>
+                    <p>A specialist in land along Nairobi's satellite towns like Kamulu, Joska, Malaa, and Kangundo Road.</p>
+                </div>
+                <a href="https://fanaka.co.ke/" target="_blank" rel="noopener noreferrer" class="btn">Visit Website</a>
+            </article>
+
+            <article class="company-card">
+                <div>
+                    <h2>Amcco Properties Ltd.</h2>
+                    <p>Focuses on titled land in Nairobi metropolitan areas like Kikuyu, Ngong, Kamangu, and Thigio.</p>
+                </div>
+                <a href="https://amccopropertiesltd.co.ke/" target="_blank" rel="noopener noreferrer" class="btn">Visit Website</a>
+            </article>
+        </div>
+
+        <a href="index.php" class="back-link">← BACK TO HOME</a>
+    </main>
+
+</body>
+</html>
