@@ -1,5 +1,8 @@
 <?php
 session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 // If someone is at the registration page, they shouldn't be logged in as anyone else
 if (isset($_SESSION['user_id'])) {
     session_unset(); 
