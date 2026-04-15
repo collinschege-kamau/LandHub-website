@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>How It Works-LandHub</title>
+        <style>
+            /* --- Global Styles --- */
+            :root {
+                --primary: #2c3e50;
+                --success: #27ae60;
+                --accent: #3498db;
+                --bg-light: #f8f9fa;
+                --white: #ffffff;
+                --text-dark: #333;
+                --text-muted: #666;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: var(--bg-light);
+                color: var(--text-dark);
+                line-height: 1.6;
+            }
+
+            /* --- Navigation --- */
+            nav {
+                background-color: var(--primary);
+                padding: 1rem 2rem;
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+
+            .nav-links {
+                display: flex;
+                justify-content: center;
+                gap: 30px;
+            }
+
+            .nav-links a {
+                color: white;
+                text-decoration: none;
+                font-weight: 500;
+                transition: color 0.3s;
+            }
+
+            .nav-links a:hover {
+                color: var(--success);
+            }
+
+            /* --- Header Section --- */
+            .page-header {
+                background-color: var(--primary);
+                color: white;
+                text-align: center;
+                padding: 60px 20px;
+                margin-bottom: 40px;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+                margin-bottom: 0px;
+                text-transform: none;
+            }
+
+            .page-header p {
+                font-size: 1.1rem;
+                opacity: 0.9;
+                margin-top: 10px;
+            }
+
+            /* --- How It Works Section --- */
+            .how-it-works {
+                max-width: 1100px;
+                margin: 0 auto;
+                padding: 0 20px 60px;
+            }
+
+            .how-it-works h1 {
+                text-align: center;
+                color: var(--primary);
+                margin-bottom: 40px;
+                font-size: 2.2rem;
+                position: relative;
+            }
+
+            .how-it-works h1::after {
+                content: '';
+                display: block;
+                width: 60px;
+                height: 4px;
+                background: var(--success);
+                margin: 10px auto;
+            }
+
+            .how-it-works h2 {
+                color: var(--success);
+                margin: 40px 0 20px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                border-left: 5px solid var(--success);
+                padding-left: 15px;
+            }
+
+            /* --- Steps Grid Layout --- */
+            .steps-container, .sellers-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 25px;
+                margin-bottom: 40px;
+            }
+
+            .step {
+                background: var(--white);
+                padding: 30px;
+                border-radius: 12px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+                transition: transform 0.3s ease;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .step:hover {
+                transform: translateY(-10px);
+            }
+
+            .step-num {
+                background-color: var(--success);
+                color: white;
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                margin-bottom: 15px;
+            }
+
+            .step h3 {
+                margin-bottom: 15px;
+                color: var(--primary);
+            }
+
+            .step p {
+                font-size: 0.95rem;
+                color: var(--text-muted);
+            }
+
+            /* --- Why LandHub Section --- */
+            .why-landhub {
+                background: var(--white);
+                padding: 40px;
+                border-radius: 12px;
+                margin-top: 50px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            }
+
+            .why-landhub h2 {
+                text-align: center;
+                border: none;
+                padding: 0;
+            }
+
+            .why-landhub p {
+                margin-bottom: 10px;
+            }
+
+            /* --- Responsive Adjustments --- */
+            @media (max-width: 768px) {
+                .page-header h1 {
+                    font-size: 1.8rem;
+                }
+                
+                .nav-links {
+                    gap: 15px;
+                    font-size: 0.9rem;
+                }
+            }
+        </style>
+    </head>
+    <BODY>
+        <nav>
+            <div class="nav-links">
+                <a href="index.php"><i class="fa fa-home"></i> Home</a>
+                <a href="About Us.html"><i class="fa fa-info-circle"></i> About LandHub</a>
+                <a href="How it works.html"><i class="fa fa-gear"></i> How it Works</a>
+            </div>
+        </nav>
+        <!-- 2. How It Works Section -->
+         <header class="page-header">
+            <h1>Selling Land Simplified</h1>
+            <p>Three simple steps to turn your property into profit.</p>
+        </header>
+        <section id="how-it-works" class="how-it-works">
+            <h1>How It Works</h1>
+            <h2>For Buyers</h2>
+            <div class="steps-container">
+                <!-- Step 1 -->
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <h3>Discover & Map</h3>
+                    <p>Browse through a wide variety of land listings. Use our<strong>Interactive Leaflet Maps</strong> to see exactly where a property is located before you even leave your house.</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <h3>Take a virtual tour</h3>
+                    <p>Get a real feel for the terrain. Watch mandatory<strong> high-definition property videos</strong> to inspect the land’s boundaries and surroundings.</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <h3>Stay Notified</h3>
+                    <p>Can't find what you're looking for? Save your search criteria, and we will send you an <strong>instant notification</strong> the moment land in your preferred area hits the market.</p>
+                </div>
+
+                <!--Step 4-->
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <h3>Connect Directly</h3>
+                    <p>No middlemen. Access the seller’s verified contact details and phone number to start negotiations immediately.</p>
+                </div>
+            </div>
+
+            <h2>For Sellers</h2>
+            <div class="sellers-container">
+                <!-- Step 1 -->
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <h3>Create an account</h3>
+                    <p>Complete your profile as a <strong>buyer </strong>(you will be directed to view posted land) OR as a <strong>seller</strong> (you will be directed to sellers dashboard to post your first land).</p>
+                </div>
+
+                <!-- Step 2 -->
+                 <div class="step">
+                    <div class="step-num">2</div>
+                    <h3>Create your listings</h3>
+                    <p>Use our intuitive <strong>Seller Dashboard</strong>to list your property in minutes. Give your land a title that stands out and set your price.</p>
+                 </div>
+
+                 <div class="step">
+                    <div class="step-num">3</div>
+                    <h3>Pin your location</h3>
+                    <p>Use our integrated map tool to drop a pin on your property. This gives buyers confidence in the exact location and neighborhood.</p>
+                 </div>
+
+                 <div class="step">
+                    <div class="step-num">4</div>
+                    <h3>Show, Don't just tell</h3>
+                    <p>Upload a mandatory video tour of your property. Listings with videos receive significantly higher engagement and "likes" from serious buyers.</p>
+                 </div>
+
+                 <div class="step">
+                    <div class="step-num">5</div>
+                    <h3>Track intrest</h3>
+                    <p>Monitor your dashboard to see how many people have "favorited" your land. Once you've closed the deal, simply mark it as <strong>"SOLD"</strong> with one click.</p>
+                 </div>
+            </div>
+                
+            <div>
+                <h2>WHY LANDHUB KENYA?</h2>
+                <p><strong>1. Transparency:</strong> Every listing includes a map location and a video tour.</p>
+                <p><strong>2. Smart alerts:</strong> We facilitate direct communication between buyers and sellers.</p>
+            </div>
+        </section>
+    </BODY>
+</html>
