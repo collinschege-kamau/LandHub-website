@@ -303,20 +303,22 @@ if($loggedInCompanyId){
         <?php if($statusMsg) echo "<p style='color:var(--success); font-weight:bold;'>$statusMsg</p>"; ?>
         
         <form action="" method="POST" enctype="multipart/form-data">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                <label><strong>Title:</strong></label>
-                <input type="text" name="title" placeholder="Title (e.g. Plot in Kitengela)" required>
-                <label><strong>Land price:</strong></label>
-                <input type="number" name="price" min="1000" max="1000000000" placeholder="Price" required>    
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                <label><strong>Land size:</strong></label>
-                <input type="text" name="size" placeholder="Land Size(e.g. 50x100) " required>
-                <label><strong>Location:</strong></label>
-                <input type="text" name="location" placeholder="Location (e.g. Nairobi, Juja)" required>
-            </div>
+           
+            <label><strong>Title:</strong></label>
+            <input type="text" name="title" placeholder="Title (e.g. Plot in Kitengela)" required>
+        
+            <label><strong>Land price:</strong></label>
+            <input type="number" name="price" min="1000" max="1000000000" placeholder="Price" required>    
+        
+            <label><strong>Land size:</strong></label>
+            <input type="text" name="size" placeholder="Land Size(e.g. 50x100) " required>
+        
+            <label><strong>Location:</strong></label>
+            <input type="text" name="location" placeholder="Location (e.g. Nairobi, Juja)" required>
+        
             <label><strong>Land description:</strong></label>
             <textarea name="description" rows="3" placeholder="Description..."></textarea>
+            
             <label><strong>Phone numer:</strong></label>
             <input type="text" name="phone" pattern="^(07|01)\d{8}$" title="Please enter a valid 10-digit Kenyan number starting with 07 or 01" placeholder="Phone number" required>
 
