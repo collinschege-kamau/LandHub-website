@@ -32,7 +32,10 @@ $result = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <title>LandHub | My Saved Plots</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
     <style>
         :root { --sold-red: #e74c3c; --available-green: #27ae60; --primary-blue: #3498db; }
         body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; padding: 20px; }
