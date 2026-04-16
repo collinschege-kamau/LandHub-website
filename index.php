@@ -40,26 +40,26 @@
             color: #333;
         }
 
-        /* --- Navigation --- */
+        /* --- Navigation (Matched to STYLE12) --- */
         nav {
-            background-color: rgba(44, 62, 80, 0.95);
-            padding: 15px 0;
+            background-color: var(--primary);
+            padding: 1rem 2rem;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         .nav-links {
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
         }
 
         .nav-links a {
             color: white;
             text-decoration: none;
-            margin: 0 20px;
             font-weight: 500;
-            transition: 0.3s;
+            transition: color 0.3s;
         }
 
         .nav-links a:hover {
