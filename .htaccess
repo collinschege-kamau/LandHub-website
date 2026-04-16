@@ -1,4 +1,10 @@
 RewriteEngine On
-RewriteCond %{HTTP:X-Forwarded-Proto} =http
+
+# Force www
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ http://www.landhub-kenya.infinityfreeapp.com/$1 [L,R=301]
+
+# Optional: Force HTTPS (since you already have SSL)
+RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
