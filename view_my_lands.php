@@ -13,12 +13,12 @@ $conn = new mysqli($servername, $db_username, $db_password, $dbname);
 if($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-if(!isset($_SESSION['company_id'])) { 
+if(!isset($_SESSION['user_id'])) { 
     header("Location: Login.php"); 
     exit(); 
 }
 // Fetch only THIS company's lands, newest first
-$query = "SELECT * FROM addlistings WHERE company_id = ? ORDER BY id DESC";
+$query = "SELECT * FROM addlistings WHERE user_id = ? ORDER BY id DESC";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $companyId);
 $stmt->execute();
