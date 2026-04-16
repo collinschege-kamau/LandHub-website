@@ -229,6 +229,27 @@ if($loggedInCompanyId){
             box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
             transform: translateY(-1px);
         }
+        /* This applies to screens smaller than 768px (most phones) */
+    @media (max-width: 768px) {
+        .sidebar {
+            position: relative; /* Stops it from floating over content */
+            width: 100%;        /* Takes full width */
+            height: auto;
+        }
+    
+        .main-content {
+            margin-left: 0;    /* Removes the gap meant for the desktop sidebar */
+            width: 100%;
+            padding: 10px;
+        }
+    
+        /* Make your input boxes and dashboard cards stack vertically */
+        .stats-container, .form-group {
+            display: block;
+            width: 100%;
+        }
+    }
+
     </style>
 </head>
 <body>
