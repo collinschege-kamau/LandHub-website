@@ -179,7 +179,7 @@ if($loggedInCompanyId){
         :root { --primary: #2c3e50; --success: #27ae60; --danger: #e74c3c; --accent: #3498db; }
         body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; display: flex; }
         
-        .sidebar { width: 260px; height: 80vh; background: var(--primary); color: white; padding: 25px; position: fixed; }
+        .sidebar { width: 260px; height: 100vh; background: var(--primary); color: white; padding: 25px; position: fixed; }
         .main-content { margin-left: 260px;text-align: center; padding: 40px; width: calc(100% - 260px); }
         
         .card { background: white; padding: 25px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
