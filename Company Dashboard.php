@@ -1,15 +1,6 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 session_start();
-/*
-// 1. Security Check
-if (!isset($_SESSION['user_id'])) {
-    header("Location: directing.html");
-    exit();
-}
-*/
+
 if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
     header("Location: directing.html");
     exit(); // Always call exit() after a redirect to stop the script from running
