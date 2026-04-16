@@ -4,6 +4,8 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
 
+session_start();
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -13,7 +15,6 @@ require 'PHPMailer/src/SMTP.php';
 
 date_default_timezone_set('Africa/Nairobi');
 
-session_start();
 $servername = "sql112.infinityfree.com";
 $db_username = "if0_41669716";
 $db_password = "v625mgR7min";
