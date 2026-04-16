@@ -28,7 +28,7 @@
                 line-height: 1.6;
             }
 
-            /* --- Navigation --- */
+            /* --- Navigation (Matched to STYLE12) --- */
             nav {
                 background-color: var(--primary);
                 padding: 1rem 2rem;
@@ -36,24 +36,23 @@
                 top: 0;
                 z-index: 1000;
             }
-
+    
             .nav-links {
                 display: flex;
                 justify-content: center;
                 gap: 30px;
             }
-
+    
             .nav-links a {
                 color: white;
                 text-decoration: none;
                 font-weight: 500;
                 transition: color 0.3s;
             }
-
+    
             .nav-links a:hover {
                 color: var(--success);
             }
-
             /* --- Header Section --- */
             .page-header {
                 background-color: var(--primary);
@@ -111,7 +110,7 @@
             /* --- Steps Grid Layout --- */
             .steps-container, .sellers-container {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                grid-template-columns: 2fr;
                 gap: 25px;
                 margin-bottom: 40px;
             }
