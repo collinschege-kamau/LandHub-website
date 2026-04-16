@@ -18,7 +18,7 @@ if(!isset($_SESSION['user_id'])) {
     exit(); 
 }
 // Fetch only THIS company's lands, newest first
-$query = "SELECT * FROM addlistings WHERE user_id = ? ORDER BY id DESC";
+$query = "SELECT * FROM addlistings WHERE company_id = ? ORDER BY id DESC";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $companyId);
 $stmt->execute();
