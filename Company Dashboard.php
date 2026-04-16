@@ -32,7 +32,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_listing'])){
     $price = $_POST['price'];
     $location = htmlspecialchars($_POST['location']);
     $description = htmlspecialchars($_POST['description']);
-    $phone_number = htmlspecialchars($_POST['phone_number']);
+    $phone_number = htmlspecialchars($_POST['phone']);
     $size = htmlspecialchars($_POST['size']);
     $lat = !empty($_POST['latitude']) ? $_POST['latitude'] : NULL;
     $lng = !empty($_POST['longitude']) ? $_POST['longitude'] : NULL;
@@ -60,7 +60,7 @@ $uploadVideoSuccess = false;
 $maxVideoSize = 100 * 1024 * 1024; // Increased to 100MB for longer videos
 
 if(isset($_FILES["landVideo"]) && $_FILES["landVideo"]["error"] === 0){
-    $videoTargetDir = "uploads/videos/";
+    $videoTargetDir = "uploads/";
     if(!is_dir($videoTargetDir)) mkdir($videoTargetDir, 0755, true);
 
     $videoFileName = time() . "_" . basename($_FILES["landVideo"]["name"]);
