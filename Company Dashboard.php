@@ -10,7 +10,10 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 */
-
+if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+    header("Location: directing.html");
+    exit(); // Always call exit() after a redirect to stop the script from running
+}
 // Database Connection
 $servername="sql112.infinityfree.com";
 $db_username="if0_41669716";
