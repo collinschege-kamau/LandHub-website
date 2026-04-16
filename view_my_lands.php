@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 session_start();
 
 $servername="sql112.infinityfree.com";
@@ -10,7 +13,7 @@ $conn = new mysqli($servername, $db_username, $db_password, $dbname);
 if($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-if(!isset($_SESSION['user_id']) ?? $session['company_id']) { header("Location: Login.php"); exit(); }
+if(!isset($_SESSION['user_id'])) { header("Location: Login.php"); exit(); }
 
 // Fetch only THIS company's lands, newest first
 $query = "SELECT * FROM addlistings WHERE user_id = ? ORDER BY id DESC";
