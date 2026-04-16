@@ -262,7 +262,7 @@
                         </div>
                     <?php endwhile; ?>
                 <?php else: ?>
-                    <p>New listings coming soon!</p>
+                    <p>New listings, coming soon!</p>
                 <?php endif; ?>
             </div>
             <a href="View Listings.php" class="btn-main">Browse All Listings</a>
