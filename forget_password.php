@@ -95,11 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #2c3e50; --success: #27ae60; --accent: #3498db; --white: #ffffff; }
-        body {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('pexels-altaf-shah-3143825-8314513.jpg');
-            background-size: cover; background-position: center; background-attachment: fixed;
-            font-family: 'Poppins', sans-serif; margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh;
-        }
+        
         .reset-card {
             background-color: rgba(255, 255, 255, 0.98); width: 90%; max-width: 400px; padding: 40px;
             border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); text-align: center;
