@@ -13,6 +13,8 @@ $conn = new mysqli($servername, $db_username, $db_password, $dbname);
 if($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+$companyId = $_SESSION['user_id'] ?? null;
+
 if(!isset($_SESSION['user_id'])) { 
     header("Location: Login.php"); 
     exit(); 
