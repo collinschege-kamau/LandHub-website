@@ -195,8 +195,9 @@
 
         .contact-container {
             display: flex;
+            flex-direction: column;
             justify-content: center;
-            gap: 40px;
+            gap: 15px;
             margin-top: 20px;
         }
 
