@@ -295,7 +295,7 @@
                         <i class="fa fa-envelope" style="color: var(--accent);"></i> collokrymboy@gmail.com
                     </div>
                     <div class="contact-item">
-                        <i class="fa fa-phone" style="color: var(--success);"></i> +254 715 185922
+                        <br><i class="fa fa-phone" style="color: var(--success);"></i> +254 715 185922
                     </div>
                 </div>
             </section>
