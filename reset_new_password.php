@@ -2,10 +2,11 @@
 date_default_timezone_set('Africa/Nairobi');
 session_start();
 
-$servername="localhost";
-$db_username="root";
-$db_password="";
-$dbname="land app";
+// Database Connection
+$servername="sql112.infinityfree.com";
+$db_username="if0_41669716";
+$db_password="v625mgR7min";
+$dbname="if0_41669716_landapp";
 
 $conn=new mysqli($servername,$db_username,$db_password,$dbname);
 
