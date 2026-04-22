@@ -32,6 +32,7 @@ $result = $stmt->get_result();
 <head>
     <title>My Published Lands</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com" />
     <!-- Leaflet JavaScript -->
