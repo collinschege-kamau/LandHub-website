@@ -24,6 +24,7 @@
             --bg-color: #f4f4f9;
             --text-muted: #7f8c8d;
         }
+
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             background-color: var(--bg-color); 
@@ -34,7 +35,8 @@
 
         h1 { 
             text-align: center; 
-            color: var(--primary-color); 
+            color: #ffffff; /* White text for the title */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* Adds a shadow so it pops */
             margin-bottom: 40px;
         }
 
@@ -113,7 +115,50 @@
     <main>
         <h1>Trusted Land Selling Companies in Kenya</h1>
 
-       <p><strong>You will find different companies with their website here. In case you want to buy land from a specific company.</strong></p>
+        <div class="grid-container">
+            <article class="company-card">
+            <!-- Example of how to make them stand out -->
+            <article class="company-card" style="border: 2px solid var(--secondary-color);">
+                <span style="background: var(--secondary-color); color: white; padding: 2px 10px; border-radius: 5px; font-size: 0.8rem;">FEATURED PARTNER</span>
+                <div>
+                    <h2>Username Properties Ltd.</h2>
+                    <p>Ranked #1 for affordability and transparency. Offers value-added plots in high-growth areas like Juja, Nakuru, and Ngong.</p>
+                </div>
+                <a href="https://www.usernameproperties.com/" target="_blank" rel="noopener noreferrer" class="btn">Visit Website</a>
+            </article>
+
+            <article class="company-card">
+                <div>
+                    <h2>Optiven Limited</h2>
+                    <p>Known for eco-friendly gated communities and large-scale land banking projects across Kenya, including Kiambu and Kitengela.</p>
+                </div>
+                <a href="https://www.optiven.co.ke" target="_blank" rel="noopener noreferrer" class="btn">Visit Website</a>
+            </article>
+
+            <article class="company-card">
+                <div>
+                    <h2>AMG Realtors</h2>
+                    <p>Specializes in affordable plots with ready title deeds in strategic locations like Nanyuki, Naivasha, and Matuu.</p>
+                </div>
+                <a href="https://amgrealtors.com/" target="_blank" rel="noopener noreferrer" class="btn">Visit Website</a>
+            </article>
+
+            <article class="company-card">
+                <div>
+                    <h2>Fanaka Real Estate</h2>
+                    <p>A specialist in land along Nairobi's satellite towns like Kamulu, Joska, Malaa, and Kangundo Road.</p>
+                </div>
+                <a href="https://fanaka.co.ke/" target="_blank" rel="noopener noreferrer" class="btn">Visit Website</a>
+            </article>
+
+            <article class="company-card">
+                <div>
+                    <h2>Amcco Properties Ltd.</h2>
+                    <p>Focuses on titled land in Nairobi metropolitan areas like Kikuyu, Ngong, Kamangu, and Thigio.</p>
+                </div>
+                <a href="https://amccopropertiesltd.co.ke/" target="_blank" rel="noopener noreferrer" class="btn">Visit Website</a>
+            </article>
+        </div>
 
         <a href="index.php" class="back-link">← BACK TO HOME</a>
     </main>
