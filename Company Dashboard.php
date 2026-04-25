@@ -275,21 +275,24 @@ if($loggedInCompanyId){
 <body>
 
 <button id="toggleBtn" onclick="toggleNav()"> > </button>
-<div class="sidebar">
-    <h2 style="color: var(--success);"><i class="fa fa-mountain"></i> LandHub</h2>
-    <div style="margin-top: 30px;">
-        <small style="color: #95a5a6;">SELLER PROFILE</small>
-        <p><strong>NAME:<?= htmlspecialchars($companyInfo['username'] ?? 'User') ?></strong></p>
-        <p style="font-size: 0.8rem; opacity: 0.8;">EMAIL:<?= htmlspecialchars($companyInfo['email'] ?? '') ?></p>
-        <a href="profile.php" class="seller-profile-btn">
-            <i class="fa-solid fa-address-card"></i> Manage Profile
-        </a>
+
+<div id="mySidebar" class="sidebar">
+    <div class="sidebar">
+        <h2 style="color: var(--success);"><i class="fa fa-mountain"></i> LandHub</h2>
+        <div style="margin-top: 30px;">
+            <small style="color: #95a5a6;">SELLER PROFILE</small>
+            <p><strong>NAME:<?= htmlspecialchars($companyInfo['username'] ?? 'User') ?></strong></p>
+            <p style="font-size: 0.8rem; opacity: 0.8;">EMAIL:<?= htmlspecialchars($companyInfo['email'] ?? '') ?></p>
+            <a href="profile.php" class="seller-profile-btn">
+                <i class="fa-solid fa-address-card"></i> Manage Profile
+            </a>
+        </div>
+            <hr style="opacity: 0.1; margin: 20px 0;">
+            <a href="index.php" class="btn" style="background: #18d81b; text-decoration: none; text-align: center; display: block; margin-bottom: 15px;">🏠 Home</a>
+            <a href="private sellers upload.html" class="btn" style="background: #cb9d1f; text-decoration: none; text-align: center;display: block; margin-bottom: 15px;">⬅ Back</a>
+            <a href="View Listings.php" class="btn" style="color: white; background: #5711e3; text-decoration: none; text-align: center; display: block; margin-bottom: 15px;"><i class="fa fa-eye"></i> View Public Site</a>
+            <a href="Logout.php" class="btn" style="color: black; background: #ef0505;  text-decoration: none; text-align: center; display: block; margin-bottom: 15px;"><i class="fa fa-sign-out"></i> Logout</a>
     </div>
-        <hr style="opacity: 0.1; margin: 20px 0;">
-        <a href="index.php" class="btn" style="background: #18d81b; text-decoration: none; text-align: center; display: block; margin-bottom: 15px;">🏠 Home</a>
-        <a href="private sellers upload.html" class="btn" style="background: #cb9d1f; text-decoration: none; text-align: center;display: block; margin-bottom: 15px;">⬅ Back</a>
-        <a href="View Listings.php" class="btn" style="color: white; background: #5711e3; text-decoration: none; text-align: center; display: block; margin-bottom: 15px;"><i class="fa fa-eye"></i> View Public Site</a>
-        <a href="Logout.php" class="btn" style="color: black; background: #ef0505;  text-decoration: none; text-align: center; display: block; margin-bottom: 15px;"><i class="fa fa-sign-out"></i> Logout</a>
 </div>
 
 <div class="main-content">
