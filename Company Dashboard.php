@@ -161,6 +161,7 @@ if($loggedInCompanyId){
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -172,100 +173,78 @@ if($loggedInCompanyId){
     
     <style>
         :root { --primary: #2c3e50; --success: #27ae60; --danger: #e74c3c; --accent: #3498db; }
-        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; display: flex; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; overflow-x: hidden; }
         
-        .sidebar { width: 260px; height: 100vh; background: var(--primary); color: white; padding: 25px; position: fixed; }
-        .main-content { margin-left: 260px;text-align: center; padding: 40px; width: calc(100% - 260px); }
+        /* 1. UPDATED SIDEBAR: Hidden by default (width: 0) */
+        .sidebar { 
+            width: 0; 
+            height: 100vh; 
+            background: var(--primary); 
+            color: white; 
+            padding: 0; /* Changed from 25px to 0 */
+            position: fixed; 
+            overflow-x: hidden; 
+            transition: 0.5s; 
+            z-index: 2000;
+        }
+
+        /* Container inside sidebar to keep content from squishing */
+        .sidebar-inner { width: 210px; padding: 25px; }
         
+        /* 2. UPDATED MAIN CONTENT: No margin-left by default */
+        .main-content { 
+            margin-left: 0; 
+            text-align: center; 
+            padding: 40px; 
+            width: 100%; 
+            transition: margin-left 0.5s; 
+        }
+        
+        /* 3. NEW TOGGLE BUTTON STYLE */
+        #toggleBtn {
+            position: fixed;
+            left: 15px;
+            top: 15px;
+            z-index: 2100;
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.5s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* ... Keep your existing Card, Map, and Table styles ... */
         .card { background: white; padding: 25px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        input, textarea { width: 100%; margin: 10px 0; padding: 12px; border: 1px solid #ddd; border-radius: 6px; }
-        
-        #map { height: 450px; width: 100%; background: #e0e0e0; /* Grey fallback color */border-radius: 8px;  margin: 20px 0; border: 2px solid #ccc;position: relative; }
-        
-        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 30px; }
-        .stat-card { background: white; padding: 20px; border-radius: 12px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th { text-align: left; padding: 15px; background: #f8f9fa; color: #777; }
-        td { padding: 15px; border-top: 1px solid #eee; }
-        
-        .btn-action { padding: 8px 15px; border-radius: 5px; text-decoration: none; color: white; font-size: 13px; font-weight: bold; display: inline-block; }
-        .status-badge { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; text-transform: uppercase; }
-        .status-available { background: #e8f5e9; color: var(--success); }
-        .status-sold { background: #ffebee; color: var(--danger); }
-        .seller-profile-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            background-color: #2c3e50; /* Dark professional blue */
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: 1px solid #34495e;
-        }
-
-        .seller-profile-btn:hover {
-            background-color: #3498db; /* Brightens to your accent blue */
-            color: white;
-            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
-            transform: translateY(-1px);
-        }
-
-        .seller-profile-btn i {
-            font-size: 1rem;
-        }
-        .btn:hover {
-            color: white;
-            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
-            transform: translateY(-1px);
-        }
-        /* This applies to screens smaller than 768px (most phones) */
-    @media (max-width: 768px) {
-        .sidebar {
-            position: relative; /* Stops it from floating over content */
-            width: 100%;        /* Takes full width */
-            height: auto;
-        }
-    
-        .main-content {
-            margin-left: 0;    /* Removes the gap meant for the desktop sidebar */
-            width: 100%;
-            padding: 10px;
-        }
-    
-        /* Make your input boxes and dashboard cards stack vertically */
-        .stats-container, .form-group {
-            display: block;
-            width: 100%;
-        }
-    }
-
+        #map { height: 450px; width: 100%; border-radius: 8px; margin: 20px 0; border: 2px solid #ccc; position: relative; }
+        /* (Add back the rest of your table and badge styles here) */
     </style>
 </head>
 <body>
 
-<div class="sidebar">
-    <h2 style="color: var(--success);"><i class="fa fa-mountain"></i> LandHub</h2>
-    <div style="margin-top: 30px;">
-        <small style="color: #95a5a6;">SELLER PROFILE</small>
-        <p><strong>NAME:<?= htmlspecialchars($companyInfo['username'] ?? 'User') ?></strong></p>
-        <p style="font-size: 0.8rem; opacity: 0.8;">EMAIL:<?= htmlspecialchars($companyInfo['email'] ?? '') ?></p>
-        <a href="profile.php" class="seller-profile-btn">
-            <i class="fa-solid fa-address-card"></i> Manage Profile
-        </a>
-    </div>
+<button id="toggleBtn" onclick="toggleNav()"> > </button>
+
+<div id="mySidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <h2 style="color: var(--success);"><i class="fa fa-mountain"></i> LandHub</h2>
+        <div style="margin-top: 30px;">
+            <small style="color: #95a5a6;">SELLER PROFILE</small>
+            <p><strong>NAME: <?= htmlspecialchars($companyInfo['username'] ?? 'User') ?></strong></p>
+            <p style="font-size: 0.8rem; opacity: 0.8;">EMAIL: <?= htmlspecialchars($companyInfo['email'] ?? '') ?></p>
+            <a href="profile.php" class="seller-profile-btn" style="color:white; text-decoration:none;">
+                <i class="fa-solid fa-address-card"></i> Manage Profile
+            </a>
+        </div>
         <hr style="opacity: 0.1; margin: 20px 0;">
-        <a href="index.php" class="btn" style="background: #18d81b; text-decoration: none; text-align: center; display: block; margin-bottom: 15px;">🏠 Home</a>
-        <a href="private sellers upload.html" class="btn" style="background: #cb9d1f; text-decoration: none; text-align: center;display: block; margin-bottom: 15px;">⬅ Back</a>
-        <a href="View Listings.php" class="btn" style="color: white; background: #5711e3; text-decoration: none; text-align: center; display: block; margin-bottom: 15px;"><i class="fa fa-eye"></i> View Public Site</a>
-        <a href="Logout.php" class="btn" style="color: black; background: #ef0505;  text-decoration: none; text-align: center; display: block; margin-bottom: 15px;"><i class="fa fa-sign-out"></i> Logout</a>
+        <a href="index.php" class="btn" style="background: #18d81b; text-decoration: none; text-align: center; display: block; margin-bottom: 15px; color:white; padding:10px; border-radius:5px;">🏠 Home</a>
+        <a href="Logout.php" class="btn" style="color: white; background: #ef0505; text-decoration: none; text-align: center; display: block; margin-bottom: 15px; padding:10px; border-radius:5px;"><i class="fa fa-sign-out"></i> Logout</a>
+    </div>
 </div>
 
-<div class="main-content">
+<div id="mainContent" class="main-content">
     <header>
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px; background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
             <div>
@@ -273,216 +252,42 @@ if($loggedInCompanyId){
                 <p style="margin: 5px 0 0; color: #777;">Welcome back, <strong><?php echo htmlspecialchars($_SESSION['username']); ?></strong></p>
             </div>
         </div>
-        <p>Manage your properties and track buyer interest.</p>
     </header>
 
     <div class="stats-grid">
-        <div class="stat-card">
-            <h3 style="margin:0; font-size: 0.9rem; color: #7f8c8d;">YOUR LISTINGS</h3>
-            <p style="font-size: 2rem; margin: 10px 0 0;"><?= $listings_result->num_rows ?></p>
         </div>
-        <div class="stat-card">
-            <h3 style="margin:0; font-size: 0.9rem; color: #7f8c8d;">TOTAL INTEREST</h3>
-            <p style="font-size: 2rem; margin: 10px 0 0; color: var(--danger);">
-                <i class="fa fa-heart"></i> 
-                <?=$totalLikes ?>
-            </p>
-        </div>
-        
-    </div>
-
-    <!-- Upload Form -->
-    <div class="card">
-        <h3><i class="fa fa-plus-circle"></i> List New Property</h3>
-        <?php if($statusMsg) echo "<p style='color:var(--success); font-weight:bold;'>$statusMsg</p>"; ?>
-        
-        <form action="" method="POST" enctype="multipart/form-data">
-           
-            <label><strong>Title:</strong></label>
-            <input type="text" name="title" placeholder="Title (e.g. Plot in Kitengela)" required>
-        
-            <label><strong>Land price:</strong></label>
-            <input type="number" name="price" min="1000" max="1000000000" placeholder="Price" required>    
-        
-            <label><strong>Land size:</strong></label>
-            <input type="text" name="size" placeholder="Land Size(e.g. 50x100) " required>
-        
-            <label><strong>Location:</strong></label>
-            <input type="text" name="location" placeholder="Location (e.g. Nairobi, Juja)" required>
-        
-            <label><strong>Land description:</strong></label>
-            <textarea name="description" rows="3" placeholder="Description..."></textarea>
-            
-            <label><strong>Phone numer:</strong></label>
-            <input type="text" name="phone" pattern="^(07|01)\d{8}$" title="Please enter a valid 10-digit Kenyan number starting with 07 or 01" placeholder="Phone number" required>
-
-            <label><i class="fa fa-image"></i><strong>Property Image:</strong></label>
-            <input type="file" name="landImage" accept="image/*" required>
-
-            <label><i class="fa fa-video"></i> <strong>Upload Property Video (Required):</strong></label>
-            <input type="file" name="landVideo" accept="video/mp4,video/webm,video/ogg" required>
-
-            <label><strong>Select Location on Map:</strong></label>
-            <div style="display: flex; gap: 10px;">
-                <input type="text" id="map-search" placeholder="Search Town in Kenya...">
-                <button type="button" onclick="searchLocation()" style="background:var(--accent); color:white; border:none; padding:10px 20px; border-radius:6px; cursor:pointer;">Search</button>
-            </div>
-
-            <div id="map"></div>
-            
-            <input type="hidden" name="latitude" id="lat">
-            <input type="hidden" name="longitude" id="lng">
-
-            <button type="submit" name="submit_listing" style="background: var(--success); color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer;">
-                🚀 POST LISTING
-            </button>
-        </form>
-    </div>
-
-    <?php if(isset($_GET['status']) && $_GET['status'] == 'success'): ?>
-        <div id="success-alert" style="background: #d4edda; color: #155724; padding: 15px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #c3e6cb; font-weight: bold; text-align: center;">
-            ✅ Changes saved successfully!
-        </div>
-    <?php endif; ?>
-    <!--Listings table-->
-    <div class="card" style="padding: 0;">
-        <table style="width: 100%;">
-            <thead>
-                <tr>
-                    <th>Property</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach($rows as $row): ?>
-                <tr>
-                    <td>
-                        <strong><?= htmlspecialchars($row['title']) ?></strong><br>
-                        <small><?= htmlspecialchars($row['location']) ?></small>
-                        <br><small><?= htmlspecialchars($row['size']) ?></small>
-                    </td>
-                    <td>Ksh <?= number_format($row['price']) ?></td>
-                    <td>
-                        <span class="status-badge status-<?= $row['status'] ?>"><?= $row['status'] ?></span>
-                    </td>
-                    <td>
-                        <form action="" method="POST" style="display:inline;">
-                            <input type="hidden" name="id" value="<?= $row['id'] ?>">
-                            <input type="hidden" name="status" value="<?= $row['status'] == 'available' ? 'sold' : 'available' ?>">
-                            <button type="submit" name="change_status" class="btn-action" style="background: var(--primary); border:none; cursor:pointer;">
-                                Mark <?= $row['status'] == 'available' ? 'Sold' : 'Available' ?>
-                            </button>
-                        </form>
-                        <!-- 1. VIEW (Green like Post Land) -->
-                        <a href="view_my_lands.php" class="btn-action" 
-                        style="background: #25d366; color: white; padding: 10px; border-radius: 5px; text-decoration: none; text-align: center; font-weight: bold; font-size: 14px; border: none;">
-                            View
-                        </a>
-
-                        <!-- 2. EDIT (Blue) -->
-                        <a href="edit_listing.php?id=<?php echo $row['id']; ?>" class="btn-action" 
-                        style="background: #3498db; color: white; padding: 10px; border-radius: 5px; text-decoration: none; text-align: center; font-weight: bold; font-size: 14px; border: none;">
-                            Edit
-                        </a>
-
-                        <!-- 3. DELETE (Red) -->
-                        <a href="delete_listing.php?id=<?php echo $row['id']; ?>" class="btn-action" 
-                        style="background: #e74c3c; color: white; padding: 10px; border-radius: 5px; text-decoration: none; text-align: center; font-weight: bold; font-size: 14px; border: none;"
-                        onclick="return confirm('Are you sure?')">
-                            Delete
-                        </a>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
 </div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 <script>
-    // 1. Initialize Map
-    var map = L.map('map').setView([-1.286389, 36.817223], 13); // Nairobi Center
+    // NEW JAVASCRIPT FOR TOGGLE
+    let sidebarOpen = false;
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap'
-    }).addTo(map);
+    function toggleNav() {
+        const sidebar = document.getElementById("mySidebar");
+        const main = document.getElementById("mainContent");
+        const btn = document.getElementById("toggleBtn");
 
-    var marker;
-
-    // 2. Click to Pin
-    map.on('click', function(e) {
-        if (marker) { map.removeLayer(marker); }
-        marker = L.marker(e.latlng).addTo(map);
-        document.getElementById('lat').value = e.latlng.lat;
-        document.getElementById('lng').value = e.latlng.lng;
-    });
-
-    // 3. Search Location
-    function searchLocation() {
-        const query = document.getElementById('map-search').value;
-        if (query.length < 3) return alert("Type a town name.");
-
-        const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&countrycodes=ke&limit=1`;
-
-        fetch(url, {
-            headers: { "User-Agent": "LandHub-User-Agent" }
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.length > 0) {
-                const lat = data[0].lat;
-                const lon = data[0].lon;
-                map.setView([lat, lon], 14);
-                if (marker) { map.removeLayer(marker); }
-                marker = L.marker([lat, lon]).addTo(map);
-                document.getElementById('lat').value = lat;
-                document.getElementById('lng').value = lon;
-            } else {
-                alert("Location not found. Try clicking on the map manually.");
-            }
-        })
-        .catch(err => {
-            console.error(err);
-            alert("Search blocked by browser security. \n\nFIX: Please just click the correct spot on the map to pin it!");
-        });
+        if (!sidebarOpen) {
+            sidebar.style.width = "260px";
+            main.style.marginLeft = "260px";
+            btn.style.left = "275px"; // Move button with menu
+            btn.innerHTML = " < ";   // Change icon
+            sidebarOpen = true;
+            
+            // Fix Leaflet map grey box after resizing
+            setTimeout(() => { map.invalidateSize(); }, 500);
+        } else {
+            sidebar.style.width = "0";
+            main.style.marginLeft = "0";
+            btn.style.left = "15px";  // Reset button
+            btn.innerHTML = " > ";   // Change back icon
+            sidebarOpen = false;
+            
+            setTimeout(() => { map.invalidateSize(); }, 500);
+        }
     }
 
-    // 4. THE FIX FOR THE GREY BOX:
-    // This forces the map to redraw itself after the page finishes loading.
-    window.addEventListener('load', function() {
-        setTimeout(function() {
-            map.invalidateSize();
-            // Trigger a fake window resize to wake up the map tiles
-            window.dispatchEvent(new Event('resize'));
-        }, 800);
-    });
-
-    window.addEventListener('load', function() {
-        // 1. Find the alert element
-        const alert = document.getElementById('success-alert');
-        
-        if (alert) {
-            // 2. Wait 3 seconds, then hide the message
-            setTimeout(function() {
-                alert.style.transition = "opacity 0.5s ease";
-                alert.style.opacity = "0";
-                
-                // Remove from layout after fade
-                setTimeout(() => alert.style.display = "none", 500);
-                
-                // 3. CLEAN THE URL: This removes "?status=success" from the browser bar
-                // This prevents the message from coming back on a manual refresh
-                const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-                window.history.replaceState({path: cleanUrl}, '', cleanUrl);
-                
-            }, 7000); // 3000ms = 3 seconds
-        }
-    });
+    // ... Keep your existing Leaflet map and alert scripts below ...
 </script>
 
 </body>
