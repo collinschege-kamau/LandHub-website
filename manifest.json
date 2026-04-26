@@ -30,7 +30,7 @@
     },
     {
       "src": "screenshot-mobile.png",
-      "sizes": "750x1334",
+      "sizes": "390x844",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "LandHub on Mobile"
