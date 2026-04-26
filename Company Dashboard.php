@@ -191,7 +191,7 @@ if($loggedInCompanyId){
         .card { background: white; padding: 25px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         input, textarea { width: 100%; margin: 10px 0; padding: 12px; border: 1px solid #ddd; border-radius: 6px; }
         
-        #map { height: 450px; width: 100%; background: #e0e0e0; /* Grey fallback color */border-radius: 8px;  margin: 20px 0; border: 2px solid #ccc;position: relative; }
+        #map { height: 450px; width: 100%; border-radius: 8px; margin: 20px 0; border: 2px solid #ccc; position: relative; background: #e0e0e0;} /* Grey fallback color */border-radius: 8px;  margin: 20px 0; border: 2px solid #ccc;position: relative; }
         
         .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 30px; }
         .stat-card { background: white; padding: 20px; border-radius: 12px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
