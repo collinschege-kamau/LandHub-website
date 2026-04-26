@@ -155,7 +155,7 @@ if($loggedInCompanyId){
         body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; display: block; }
         
         .sidebar { 
-            width: 260px; 
+            left: -260px;
             height: 100vh; 
             background: var(--primary); 
             color: white; 
