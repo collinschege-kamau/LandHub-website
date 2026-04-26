@@ -1,10 +1,7 @@
 const cacheName = 'landhub-v1';
 const assets = [
-  '/',
-  '/index.php',
-  '/View Listings.php', // Add your other important pages here
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css',
-  'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'
+  'index.php',
+  'manifest.json'
 ];
 
 // This runs when the app is first installed
