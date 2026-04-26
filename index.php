@@ -214,6 +214,16 @@
             .hero-text h1 { font-size: 2rem; }
         }
     </style>
+    <script>
+      // Check if the browser supports Service Workers
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('LandHub App: Registered Successfully'))
+            .catch(err => console.log('LandHub App: Registration Failed', err));
+        });
+      }
+    </script>
 </head>
 <body>
 
