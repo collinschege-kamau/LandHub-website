@@ -1,9 +1,9 @@
 {
   "name": "LandHub Kenya",
   "short_name": "LandHub",
-  "start_url": "/index.php",
+  "start_url": "index.php",
   "display": "standalone",
-  "background_color": "#b8b8b8",
+  "background_color": "#ffffff",
   "theme_color": "#2c3e50",
   "icons": [
     {
