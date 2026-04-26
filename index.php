@@ -223,7 +223,7 @@
       // Check if the browser supports Service Workers
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('sw.js')
+          navigator.serviceWorker.register('/sw.js', { scope: '/' })
             .then(reg => console.log('LandHub App: Registered Successfully'))
             .catch(err => console.log('LandHub App: Registration Failed', err));
         });
@@ -248,8 +248,8 @@
                 <div class="logo">
                     <img src="landhub logo.png" alt="LandHub Logo">
                 </div>
-                <button id="installBtn" style="display:none; width:100%; padding:15px; background:var(--primary-blue); color:white; border:none; font-weight:bold;">
-                   Install LandHub App
+                <button id="installBtn" style="display:none; width:100%; padding:15px; background:var(--accent); color:white; border:none; font-weight:bold;">
+                    Install LandHub App
                 </button>
             </header>
         </div>
