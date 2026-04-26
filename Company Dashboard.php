@@ -295,7 +295,7 @@ if($loggedInCompanyId){
             <textarea name="description" rows="3" placeholder="Description..."></textarea>
             
             <label><strong>Phone number:</strong></label>
-            <input type="text" name="phone" pattern="^(07|01)\d{8}$" title="Kenyan number starting with 07 or 01" placeholder="Phone number" required>
+            <input type="text" name="phone" pattern="^(07|01)\d{8}$" title="Kenyan number starting with 07 or 01" placeholder="Phone number (Eg.0712345678)" required>
             
             <label><i class="fa fa-image"></i><strong>Property Image:</strong></label>
             <input type="file" name="landImage" accept="image/*" required>
