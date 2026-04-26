@@ -248,7 +248,7 @@
                 <div class="logo">
                     <img src="landhub logo.png" alt="LandHub Logo">
                 </div>
-                <button id="installBtn" style="display:none; width:100%; padding:15px; background:var(--accent); color:white; border:none; font-weight:bold;">
+                <button id="installBtn" style="display:none; width:100%; padding:15px; background:var(--accent); color:black; border:none; font-weight:bold;">
                     Install LandHub App
                 </button>
             </header>
