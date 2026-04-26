@@ -280,7 +280,7 @@ if($loggedInCompanyId){
         <?php if($statusMsg) echo "<p style='color:var(--success); font-weight:bold;'>$statusMsg</p>"; ?>
         <form action="" method="POST" enctype="multipart/form-data">
             <label><strong>Title:</strong></label>
-            <input type="text" name="title" placeholder="Title (e.g. Plot in Kitengela)" required>
+            <input type="text" name="title" placeholder="Title (e.g. Plot in Juja)" required>
             
             <label><strong>Land price:</strong></label>
             <input type="number" name="price" min="1000" max="1000000000" placeholder="Price" required>  
