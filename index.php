@@ -14,6 +14,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="theme-color" content="#2c3e50">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LandHub Kenya | Home</title>
@@ -243,6 +248,9 @@
                 <div class="logo">
                     <img src="landhub logo.png" alt="LandHub Logo">
                 </div>
+                <button id="installBtn" style="display:none; width:100%; padding:15px; background:var(--primary-blue); color:white; border:none; font-weight:bold;">
+                   Install LandHub App
+                </button>
             </header>
         </div>
 
@@ -312,6 +320,25 @@
             </section>
         </div>
     </div>
+    <script>
+        let deferredPrompt;
+        const installBtn = document.getElementById('installBtn');
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+          e.preventDefault();
+          deferredPrompt = e;
+          installBtn.style.display = 'block'; // Show button when app is ready to install
+        });
+        
+        installBtn.addEventListener('click', () => {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then((choice) => {
+            if (choice.outcome === 'accepted') {
+              installBtn.style.display = 'none';
+            }
+          });
+        });
+    </script>
 
     <footer>
         &copy; 2026 LandHub Kenya. All rights reserved. <br>
