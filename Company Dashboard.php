@@ -150,35 +150,29 @@ if($loggedInCompanyId){
     
     <style>
         :root { --primary: #2c3e50; --success: #27ae60; --danger: #e74c3c; --accent: #3498db; }
-        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; display: block; overflow-x: hidden; }
+    
+        /* Change body from flex to block to prevent the sidebar from pushing content */
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; display: block; }
         
-        /* Sidebar Hidden by Default */
         .sidebar { 
-            width: 0; 
+            width: 260px; 
             height: 100vh; 
             background: var(--primary); 
             color: white; 
             position: fixed; 
             top: 0;
-            left: 0;
-            overflow-x: hidden; 
+            left: -260px; /* Start completely off-screen */
             transition: 0.5s; 
             z-index: 2000;
+            overflow-y: auto;
         }
-
-        .sidebar-inner { 
-            width: 260px; 
-            padding: 25px; 
-            box-sizing: border-box;
-        }
-        
+    
+        .sidebar-inner { padding: 25px; width: 260px; box-sizing: border-box; }
+    
         .main-content { 
             margin-left: 0;
-            text-align: center; 
             padding: 40px; 
-            width: 100%; 
             transition: margin-left 0.5s; 
-            box-sizing: border-box;
         }
         
         .card { background: white; padding: 25px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
@@ -207,16 +201,30 @@ if($loggedInCompanyId){
         }
         .seller-profile-btn:hover { background-color: #3498db; box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3); transform: translateY(-1px); }
 
+        /* The Toggle Button needs to stay visible */
         #toggleBtn {
-            position: fixed; left: 15px; top: 15px; z-index: 2100;
-            background: var(--success); color: white; border: none;
-            padding: 10px 15px; border-radius: 5px; cursor: pointer;
-            font-weight: bold; transition: 0.5s; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: fixed;
+            left: 15px;
+            top: 15px;
+            z-index: 2100;
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.5s;
         }
-
+    
+        /* Helper class for when the sidebar is open */
+        .sidebar.active { left: 0; }
+        .main-content.active { margin-left: 260px; }
+    
+        /* Mobile adjustments */
         @media (max-width: 768px) {
-            .main-content { padding: 60px 10px 10px 10px; }
-            .stats-grid { grid-template-columns: 1fr; }
+            .main-content.active { margin-left: 0; }
+            .sidebar { width: 80%; }
         }
     </style>
 </head>
@@ -273,20 +281,28 @@ if($loggedInCompanyId){
         <form action="" method="POST" enctype="multipart/form-data">
             <label><strong>Title:</strong></label>
             <input type="text" name="title" placeholder="Title (e.g. Plot in Kitengela)" required>
+            
             <label><strong>Land price:</strong></label>
             <input type="number" name="price" min="1000" max="1000000000" placeholder="Price" required>  
+            
             <label><strong>Land size:</strong></label>
             <input type="text" name="size" placeholder="Land Size(e.g. 50x100) " required>
+            
             <label><strong>Location:</strong></label>
             <input type="text" name="location" placeholder="Location (e.g. Nairobi, Juja)" required>
+            
             <label><strong>Land description:</strong></label>
             <textarea name="description" rows="3" placeholder="Description..."></textarea>
+            
             <label><strong>Phone number:</strong></label>
             <input type="text" name="phone" pattern="^(07|01)\d{8}$" title="Kenyan number starting with 07 or 01" placeholder="Phone number" required>
+            
             <label><i class="fa fa-image"></i><strong>Property Image:</strong></label>
             <input type="file" name="landImage" accept="image/*" required>
+            
             <label><i class="fa fa-video"></i> <strong>Upload Property Video (Required):</strong></label>
             <input type="file" name="landVideo" accept="video/mp4,video/webm,video/ogg" required>
+            
             <label><strong>Select Location on Map:</strong></label>
             <div style="display: flex; gap: 10px;">
                 <input type="text" id="map-search" placeholder="Search Town in Kenya...">
@@ -301,7 +317,13 @@ if($loggedInCompanyId){
         </form>
     </div>
 
-    <div class="card" style="padding: 0; overflow-x: auto;">
+    <?php if(isset($_GET['status']) && $_GET['status'] == 'success'): ?>
+        <div id="success-alert" style="background: #d4edda; color: #155724; padding: 15px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #c3e6cb; font-weight: bold; text-align: center;">
+            ✅ Changes saved successfully!
+        </div>
+    <?php endif; ?>
+    <!--Listings table-->
+    <div class="card" style="padding: 0;">
         <table style="width: 100%;">
             <thead>
                 <tr>
@@ -317,9 +339,12 @@ if($loggedInCompanyId){
                     <td>
                         <strong><?= htmlspecialchars($row['title']) ?></strong><br>
                         <small><?= htmlspecialchars($row['location']) ?></small>
+                        <br><small><?= htmlspecialchars($row['size']) ?></small>
                     </td>
                     <td>Ksh <?= number_format($row['price']) ?></td>
-                    <td><span class="status-badge status-<?= $row['status'] ?>"><?= $row['status'] ?></span></td>
+                    <td>
+                        <span class="status-badge status-<?= $row['status'] ?>"><?= $row['status'] ?></span>
+                    </td>
                     <td>
                         <form action="" method="POST" style="display:inline;">
                             <input type="hidden" name="id" value="<?= $row['id'] ?>">
@@ -328,6 +353,144 @@ if($loggedInCompanyId){
                                 Mark <?= $row['status'] == 'available' ? 'Sold' : 'Available' ?>
                             </button>
                         </form>
-                        <a href="view_my_lands.php" class="btn-action" style="background: #25d366;">View</a>
-                        <a href="edit_listing.php?id=<?= $row['id']; ?>" class="btn-action" style="background: #3498db;">Edit</a>
-                        <a href="delete_listing.php?id=<?= $row['id']; ?>" class="btn-action" style
+                        <!-- 1. VIEW (Green like Post Land) -->
+                        <a href="view_my_lands.php" class="btn-action" 
+                        style="background: #25d366; color: white; padding: 10px; border-radius: 5px; text-decoration: none; text-align: center; font-weight: bold; font-size: 14px; border: none;">
+                            View
+                        </a>
+
+                        <!-- 2. EDIT (Blue) -->
+                        <a href="edit_listing.php?id=<?php echo $row['id']; ?>" class="btn-action" 
+                        style="background: #3498db; color: white; padding: 10px; border-radius: 5px; text-decoration: none; text-align: center; font-weight: bold; font-size: 14px; border: none;">
+                            Edit
+                        </a>
+
+                        <!-- 3. DELETE (Red) -->
+                        <a href="delete_listing.php?id=<?php echo $row['id']; ?>" class="btn-action" 
+                        style="background: #e74c3c; color: white; padding: 10px; border-radius: 5px; text-decoration: none; text-align: center; font-weight: bold; font-size: 14px; border: none;"
+                        onclick="return confirm('Are you sure?')">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+    // NEW JAVASCRIPT FOR TOGGLE
+    let sidebarOpen = false;
+
+    function toggleNav() {
+        const sidebar = document.getElementById("mySidebar");
+        const main = document.querySelector(".main-content");
+        const btn = document.getElementById("toggleBtn");
+
+        if (!sidebarOpen) {
+            sidebar.classList.add("active");
+            main.classList.add("active");
+            btn.style.left = "275px"; 
+            btn.innerHTML = " < ";
+            sidebarOpen = true;
+        } else {
+            sidebar.classList.remove("active");
+            main.classList.remove("active");
+            btn.style.left = "15px"; 
+            btn.innerHTML = " > ";
+            sidebarOpen = false;
+        }
+        
+        // Refresh map if it exists
+        if(typeof map !== 'undefined') {
+            setTimeout(() => { map.invalidateSize(); }, 500);
+        }
+    }
+    // 1. Initialize Map
+    var map = L.map('map').setView([-1.286389, 36.817223], 13); // Nairobi Center
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    var marker;
+
+    // 2. Click to Pin
+    map.on('click', function(e) {
+        if (marker) { map.removeLayer(marker); }
+        marker = L.marker(e.latlng).addTo(map);
+        document.getElementById('lat').value = e.latlng.lat;
+        document.getElementById('lng').value = e.latlng.lng;
+    });
+
+    // 3. Search Location
+    function searchLocation() {
+        const query = document.getElementById('map-search').value;
+        if (query.length < 3) return alert("Type a town name.");
+
+        const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&countrycodes=ke&limit=1`;
+
+        fetch(url, {
+            headers: { "User-Agent": "LandHub-User-Agent" }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.length > 0) {
+                const lat = data[0].lat;
+                const lon = data[0].lon;
+                map.setView([lat, lon], 14);
+                if (marker) { map.removeLayer(marker); }
+                marker = L.marker([lat, lon]).addTo(map);
+                document.getElementById('lat').value = lat;
+                document.getElementById('lng').value = lon;
+            } else {
+                alert("Location not found. Try clicking on the map manually.");
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Search blocked by browser security. \n\nFIX: Please just click the correct spot on the map to pin it!");
+        });
+    }
+
+    // 4. THE FIX FOR THE GREY BOX:
+    // This forces the map to redraw itself after the page finishes loading.
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            map.invalidateSize();
+            // Trigger a fake window resize to wake up the map tiles
+            window.dispatchEvent(new Event('resize'));
+        }, 800);
+    });
+
+    window.addEventListener('load', function() {
+        // 1. Find the alert element
+        const alert = document.getElementById('success-alert');
+        
+        if (alert) {
+            // 2. Wait 3 seconds, then hide the message
+            setTimeout(function() {
+                alert.style.transition = "opacity 0.5s ease";
+                alert.style.opacity = "0";
+                
+                // Remove from layout after fade
+                setTimeout(() => alert.style.display = "none", 500);
+                
+                // 3. CLEAN THE URL: This removes "?status=success" from the browser bar
+                // This prevents the message from coming back on a manual refresh
+                const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                window.history.replaceState({path: cleanUrl}, '', cleanUrl);
+                
+            }, 7000); // 3000ms = 3 seconds
+        }
+    });
+</script>
+
+</body>
+</html>
+
+</html>
