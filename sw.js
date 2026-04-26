@@ -16,3 +16,11 @@ self.addEventListener('install', e => {
     })
   );
 });
+self.addEventListener('fetch', e => {
+  e.respondWith(
+    caches.match(e.request).then(res => {
+      // Return the cached file OR fetch from network
+      return res || fetch(e.request);
+    })
+  );
+});
