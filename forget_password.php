@@ -41,14 +41,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail = new PHPMailer(true);
             try {
                 $mail->isSMTP();
+                $mail->SMTPOptions = array(
+                    'ssl' => array(
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true
+                    )
+                );
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
-                $mail->Username   = 'YOUR_GMAIL@gmail.com'; // Your Gmail address
-                $mail->Password   = 'YOUR_APP_PASSWORD';    // 16-digit Google App Password
+                $mail->Username   = 'collokrymboy@gmail.com'; // Your Gmail address
+                $mail->Password   = 'otbu ehmr upgf wwji';    // 16-digit Google App Password
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port       = 587;
 
-                $mail->setFrom('YOUR_GMAIL@gmail.com', 'LandHub Kenya');
+                $mail->setFrom('collokrymboy@gmail.com', 'LandHub Kenya');
                 $mail->addAddress($email);
     
                 $mail->isHTML(true);
