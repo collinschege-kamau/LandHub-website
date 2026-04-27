@@ -10,15 +10,7 @@ if (isset($_SESSION['user_id'])) {
 error_reporting(E_ALL);
 ini_set('display_errors',1);
 
-$servername="sql112.infinityfree.com";
-$db_username="if0_41669716";
-$db_password="v625mgR7min";
-$dbname="if0_41669716_landapp";
-
-$conn=new mysqli($servername,$db_username,$db_password,$dbname);
-if($conn->connect_error){
-    die("Connection failed: " . $conn->connect_error);
-}
+require_once 'config.php';
 
 // Initialize messages
 $msg = "";
