@@ -1,11 +1,6 @@
 <?php
     // 1. Database Connection
-    $servername = "sql112.infinityfree.com";
-    $username = "if0_41669716";
-    $password = "v625mgR7min";
-    $dbname = "if0_41669716_landapp";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    require_once 'config.php';
 
     // 2. Fetch 3 random available listings for the preview
     $featured_sql = "SELECT title, price, location, image_path FROM addlistings WHERE status != 'sold' ORDER BY RAND() LIMIT 3";
