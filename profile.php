@@ -3,15 +3,7 @@ session_start();
 date_default_timezone_set('Africa/Nairobi');
 
 // 1. Connection
-$servername="sql112.infinityfree.com"; 
-$db_username="if0_41669716"; 
-$db_password="v625mgR7min"; 
-$dbname="if0_41669716_landapp";
-
-$conn=new mysqli($servername,$db_username,$db_password,$dbname);
-if($conn->connect_error){
-    die("Connection failed: " . $conn->connect_error);
-}
+require_once 'config.php';
 
 // 2. Access Control - Redirect if not logged in
 if (!isset($_SESSION['user_id'])) {
