@@ -205,7 +205,31 @@
             gap: 15px;
             margin-top: 20px;
         }
-
+        /* LandHub App Install Button Styles */
+        #installBtn {
+            display: none; /* Hidden by default; toggled via JavaScript */
+            width: 100%;
+            padding: 15px;
+            background-color: var(--accent); /* Uses your existing accent variable */
+            color: black;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            border-radius: 8px; /* Optional: adds a slight curve for a modern look */
+        }
+        
+        /* Hover State */
+        #installBtn:hover {
+            background-color: var(--accent-hover, #e0e0e0); /* Falls back to light grey if no hover variable exists */
+            filter: brightness(90%); /* Automatically darkens the accent color slightly */
+        }
+        
+        /* Active/Click State */
+        #installBtn:active {
+            transform: scale(0.98); /* Gives a "pressed" feel when clicked */
+        }
         footer {
             text-align: center;
             padding: 30px;
@@ -248,7 +272,7 @@
                 <div class="logo">
                     <img src="landhub logo.png" alt="LandHub Logo">
                 </div>
-                <button id="installBtn" style="display:none; width:100%; padding:15px; background:var(--accent); color:black; border:none; font-weight:bold; cursor:pointer;">
+                <button id="installBtn">
                     Install LandHub App
                 </button>
             </header>
