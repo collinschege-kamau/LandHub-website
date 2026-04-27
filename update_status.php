@@ -6,12 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-$servername = "sql112.infinityfree.com";
-$username = "if0_41669716";
-$password = "v625mgR7min";
-$dbname = "if0_41669716_landapp";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
+require_once 'config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']) && isset($_POST['status'])) {
     $listing_id = $_POST['id'];
