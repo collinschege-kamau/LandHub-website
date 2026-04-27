@@ -1,5 +1,6 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 require 'PHPMailer/src/Exception.php';
@@ -36,17 +37,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("sis", $email, $otp, $expires);
         $stmt->execute();
 
-        // 3. Store email in session for the next step
-        $_SESSION['reset_email'] = $email;
-        
-        // For now, we echo it so you can test without an email server
-        echo "<script>alert('Your reset code is: $otp');</script>"; 
-        
-        header("Location: verify_otp.php");
-        exit();
-    } else {
-        $error = "Username and Email combination not found.";
-    }
+        // PHPMailer SMTP Configuration
+            $mail = new PHPMailer(true);
+            try {
+                $mail->isSMTP();
+                $mail->Host       = 'smtp.gmail.com';
+                $mail->SMTPAuth   = true;
+                $mail->Username   = 'YOUR_GMAIL@gmail.com'; // Your Gmail address
+                $mail->Password   = 'YOUR_APP_PASSWORD';    // 16-digit Google App Password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port       = 587;
+
+                $mail->setFrom('YOUR_GMAIL@gmail.com', 'LandHub Kenya');
+                $mail->addAddress($email);
+    
+                $mail->isHTML(true);
+                $mail->Subject = 'Password Reset Code';
+                $mail->Body    = "Your LandHub verification code is: <b>$otp</b>. It expires in 15 minutes.";
+    
+                $mail->send();
+                $_SESSION['reset_email'] = $email;
+                header("Location: verify_otp.php");
+                exit();
+            } catch (Exception $e) {
+                $error = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+        } else {
+            $error = "Username and Email combination not found.";
+        }
 }
 ?>
 
