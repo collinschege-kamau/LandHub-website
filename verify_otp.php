@@ -78,6 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="number" name="otp" placeholder="Enter 6-digit code" required>
             <button type="submit">Verify Now</button>
         </form>
+                <a href="forget_password.php" class="back-btn">Resend code</a>
     </div>
 </body>
 </html>
