@@ -292,7 +292,7 @@
                 <i class="fa fa-exclamation-triangle"></i> MAKE SURE YOU HAVE READ "HOW IT WORKS" BEFORE CONTINUING
             </div>
             <div class="action-buttons">
-                <a href="private sellers upload.html" class="btn-main"><i class="fa fa-user"></i> Private Seller</a>
+                <a href="private sellers upload.html" class="btn-main"><i class="fa fa-user"></i> Buyers/Sellers</a>
                 <a href="companies.html" class="btn-main"><i class="fa fa-building"></i>Companies</a>
             </div>
         </div>
