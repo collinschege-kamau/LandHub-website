@@ -2,15 +2,8 @@
 session_start();
 
 // Database Connection
-$servername="sql112.infinityfree.com";
-$db_username="if0_41669716";
-$db_password="v625mgR7min";
-$dbname="if0_41669716_landapp";
+require_once 'config.php';
 
-$conn = new mysqli($servername, $db_username, $db_password, $dbname);
-if($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 // Ensure only the logged-in company can delete
 if(!isset($_SESSION['username']) || $_SESSION['role'] !== 'seller'){
     exit("Unauthorized");
