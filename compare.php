@@ -8,11 +8,7 @@ if (empty($ids)) {
 $idArray = explode(',', $ids);
 $placeholders = implode(',', array_fill(0, count($idArray), '?'));
 
-$servername = "sql112.infinityfree.com";
-$username = "if0_41669716";
-$password = "v625mgR7min";
-$dbname = "if0_41669716_landapp";
-$conn = new mysqli($servername, $username, $password, $dbname);
+require_once 'config.php';
 
 $stmt = $conn->prepare("SELECT * FROM addlistings WHERE id IN ($placeholders)");
 $stmt->bind_param(str_repeat('i', count($idArray)), ...$idArray);
