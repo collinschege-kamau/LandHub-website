@@ -5,15 +5,8 @@ error_reporting(E_ALL);
 session_start();
 
 // Database Connection
-$servername="sql112.infinityfree.com";
-$db_username="if0_41669716";
-$db_password="v625mgR7min";
-$dbname="if0_41669716_landapp";
+require_once 'config.php';
 
-$conn = new mysqli($servername, $db_username, $db_password, $dbname);
-if($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 // Security Check - Ensure 'seller' role matches your login system
 if(!isset($_SESSION['user_id'])){
     header("Location: Login.php");
