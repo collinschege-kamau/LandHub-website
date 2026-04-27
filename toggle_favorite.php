@@ -2,16 +2,7 @@
 session_start();
 header('Content-Type: application/json');
 
-$servername = "sql112.infinityfree.com";
-$username = "if0_41669716";
-$password = "v625mgR7min";
-$dbname = "if0_41669716_landapp";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    echo json_encode(['status' => 'error', 'message' => 'Database connection failed']);
-    exit();
-}
+require_once 'config.php';
 
 // 1. Check if user is logged in
 if(!isset($_SESSION['user_id'])) {
