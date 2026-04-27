@@ -22,14 +22,14 @@
   ],
   "screenshots": [
     {
-      "src": "screenshot-desktop.png",
+      "src": "desk.png",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
       "label": "LandHub on Desktop"
     },
     {
-      "src": "screenshot-mobile.png",
+      "src": "mobile.png",
       "sizes": "750x1334",
       "type": "image/png",
       "form_factor": "narrow",
