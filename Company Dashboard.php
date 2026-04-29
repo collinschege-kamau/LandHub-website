@@ -5,7 +5,7 @@ if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
     header("Location: directing.html");
     exit(); 
 }
-// Database Connection
+
 require_once 'config.php';
 
 $loggedInCompanyId = $_SESSION['user_id'];
@@ -78,7 +78,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_listing'])){
     }
 }
 
-// Notification Logic
 $stmt_notif = $conn->prepare("SELECT id FROM saved_searches WHERE location = ? AND (max_price >= ? OR max_price IS NULL)");
 if(isset($location)) {
     $stmt_notif->bind_param("sd", $location, $price);
@@ -144,7 +143,6 @@ if($loggedInCompanyId){
     <style>
         :root { --primary: #2c3e50; --success: #27ae60; --danger: #e74c3c; --accent: #3498db; }
     
-        /* Change body from flex to block to prevent the sidebar from pushing content */
         body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; display: block; }
         
         .sidebar { 
@@ -154,7 +152,7 @@ if($loggedInCompanyId){
             color: white; 
             position: fixed; 
             top: 0;
-            left: -260px; /* Start completely off-screen */
+            left: -260px; 
             transition: 0.5s; 
             z-index: 2000;
             overflow-y: auto;
@@ -194,7 +192,6 @@ if($loggedInCompanyId){
         }
         .seller-profile-btn:hover { background-color: #3498db; box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3); transform: translateY(-1px); }
 
-        /* The Toggle Button needs to stay visible */
         #toggleBtn {
             position: fixed;
             left: 15px;
@@ -210,11 +207,9 @@ if($loggedInCompanyId){
             transition: 0.5s;
         }
     
-        /* Helper class for when the sidebar is open */
         .sidebar.active { left: 0; }
         .main-content.active { margin-left: 260px; }
     
-        /* Mobile adjustments */
         @media (max-width: 768px) {
             .main-content.active { margin-left: 0; }
             .sidebar { width: 80%; }
@@ -315,7 +310,7 @@ if($loggedInCompanyId){
             ✅ Changes saved successfully!
         </div>
     <?php endif; ?>
-    <!--Listings table-->
+    
     <div class="card" style="padding: 0;">
         <table style="width: 100%;">
             <thead>
@@ -346,19 +341,19 @@ if($loggedInCompanyId){
                                 Mark <?= $row['status'] == 'available' ? 'Sold' : 'Available' ?>
                             </button>
                         </form>
-                        <!-- 1. VIEW (Green like Post Land) -->
+                        
                         <a href="view_my_lands.php" class="btn-action" 
                         style="background: #25d366; color: white; padding: 10px; border-radius: 5px; text-decoration: none; text-align: center; font-weight: bold; font-size: 14px; border: none;">
                             View
                         </a>
 
-                        <!-- 2. EDIT (Blue) -->
+                        
                         <a href="edit_listing.php?id=<?php echo $row['id']; ?>" class="btn-action" 
                         style="background: #3498db; color: white; padding: 10px; border-radius: 5px; text-decoration: none; text-align: center; font-weight: bold; font-size: 14px; border: none;">
                             Edit
                         </a>
 
-                        <!-- 3. DELETE (Red) -->
+                        
                         <a href="delete_listing.php?id=<?php echo $row['id']; ?>" class="btn-action" 
                         style="background: #e74c3c; color: white; padding: 10px; border-radius: 5px; text-decoration: none; text-align: center; font-weight: bold; font-size: 14px; border: none;"
                         onclick="return confirm('Are you sure?')">
@@ -375,7 +370,6 @@ if($loggedInCompanyId){
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
-    // NEW JAVASCRIPT FOR TOGGLE
     let sidebarOpen = false;
 
     function toggleNav() {
@@ -397,12 +391,10 @@ if($loggedInCompanyId){
             sidebarOpen = false;
         }
         
-        // Refresh map if it exists
         if(typeof map !== 'undefined') {
             setTimeout(() => { map.invalidateSize(); }, 500);
         }
     }
-    // 1. Initialize Map
     var map = L.map('map').setView([-1.286389, 36.817223], 13); // Nairobi Center
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -412,7 +404,6 @@ if($loggedInCompanyId){
 
     var marker;
 
-    // 2. Click to Pin
     map.on('click', function(e) {
         if (marker) { map.removeLayer(marker); }
         marker = L.marker(e.latlng).addTo(map);
@@ -420,7 +411,6 @@ if($loggedInCompanyId){
         document.getElementById('lng').value = e.latlng.lng;
     });
 
-    // 3. Search Location
     function searchLocation() {
         const query = document.getElementById('map-search').value;
         if (query.length < 3) return alert("Type a town name.");
@@ -450,31 +440,24 @@ if($loggedInCompanyId){
         });
     }
 
-    // 4. THE FIX FOR THE GREY BOX:
-    // This forces the map to redraw itself after the page finishes loading.
     window.addEventListener('load', function() {
         setTimeout(function() {
             map.invalidateSize();
-            // Trigger a fake window resize to wake up the map tiles
+            
             window.dispatchEvent(new Event('resize'));
         }, 800);
     });
 
     window.addEventListener('load', function() {
-        // 1. Find the alert element
         const alert = document.getElementById('success-alert');
         
         if (alert) {
-            // 2. Wait 3 seconds, then hide the message
             setTimeout(function() {
                 alert.style.transition = "opacity 0.5s ease";
                 alert.style.opacity = "0";
                 
-                // Remove from layout after fade
                 setTimeout(() => alert.style.display = "none", 500);
                 
-                // 3. CLEAN THE URL: This removes "?status=success" from the browser bar
-                // This prevents the message from coming back on a manual refresh
                 const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
                 window.history.replaceState({path: cleanUrl}, '', cleanUrl);
                 
