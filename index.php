@@ -311,8 +311,8 @@
                 <i class="fa fa-exclamation-triangle"></i> MAKE SURE YOU HAVE READ "<a href="How it works.html"><i class="fa fa-gear"></i> How it Works</a>" BEFORE CONTINUING
             </div>
             <div class="action-buttons">
-                <a href="directing.html" class="btn-main"><i class="fa fa-user"></i>Create OR Login an account</a>
-                <a href="companies.html" class="btn-main"><i class="fa fa-building"></i>Companies</a>
+                <a href="directing.html" class="btn-main"><i class="fa fa-user"></i> Create OR Login an account</a>
+                <a href="companies.html" class="btn-main"><i class="fa fa-building"></i> Companies</a>
             </div>
         </div>
 
