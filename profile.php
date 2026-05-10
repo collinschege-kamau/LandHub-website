@@ -1,4 +1,5 @@
 <?php
+ob_start(); // Prevents "Headers already sent" errors
 session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -15,11 +16,11 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $success_msg = "";
 $error_msg = "";
+$redirect_now = false; // Flag for the JS fallback
 
 // 3. Handle Form Submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_username = trim($_POST['username']);
-    // Ensure this matches the 'name' attribute in your HTML
     $new_phone = trim($_POST['phone_number'] ?? ''); 
     $new_password = $_POST['new_password'];
 
@@ -29,24 +30,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if ($update->execute()) {
         $_SESSION['username'] = $new_username; 
-        $success_msg = "Profile updated successfully!";
-    }
-    
-    // Optional: Update Password if they typed something
-    if (!empty($new_password)) {
-        $hashed_pass = password_hash($new_password, PASSWORD_DEFAULT);
-        $pass_stmt = $conn->prepare("UPDATE registrations SET password = ? WHERE id = ?");
-        $pass_stmt->bind_param("si", $hashed_pass, $user_id);
-        $pass_stmt->execute();
-    }
+        $success_msg = "Profile updated successfully! Redirecting...";
+        $redirect_now = true;
+
+        // Optional: Update Password if they typed something
+        if (!empty($new_password)) {
+            $hashed_pass = password_hash($new_password, PASSWORD_DEFAULT);
+            $pass_stmt = $conn->prepare("UPDATE registrations SET password = ? WHERE id = ?");
+            $pass_stmt->bind_param("si", $hashed_pass, $user_id);
+            $pass_stmt->execute();
+        }
+
+        // Set fallback URL
+        $target_url = 'Company Dashboard.php'; 
         if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
             $target_url = $_SERVER['HTTP_REFERER'];
         }
         
         // PHP-level redirect attempt
         header("Refresh: 2; url=" . $target_url);
-    }
-}
+    } // This closes the 'if ($update->execute())'
+} // This closes the 'if ($_SERVER["REQUEST_METHOD"] == "POST")'
 
 // 4. Fetch Current Data to display in fields
 $stmt = $conn->prepare("SELECT username, email, phone_number FROM registrations WHERE id = ?");
@@ -121,6 +125,13 @@ $user = $stmt->get_result()->fetch_assoc();
     <a href="View Listings.php" class="back-link"><i class="fa fa-arrow-left"></i> Back to Listings Dashboard</a>
     <a href="Company Dashboard.php" class="back-link"><i class="fa fa-arrow-left"></i> Back to Seller Dashboard</a>
 </div>
-
+<?php if($redirect_now): ?>
+<script>
+    // JavaScript fallback if PHP 'Refresh' header is blocked by the browser
+    setTimeout(function(){
+        window.location.href = "<?php echo $target_url; ?>";
+    }, 2000); // 2000ms = 2 seconds
+</script>
+<?php endif; ?>
 </body>
 </html>
