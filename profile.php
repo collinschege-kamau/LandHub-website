@@ -12,8 +12,10 @@ $user_id = $_SESSION['user_id'];
 $success_msg = "";
 $error_msg = "";
 
+// 3. Handle Form Submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_username = trim($_POST['username']);
+    // Ensure this matches the 'name' attribute in your HTML
     $new_phone = trim($_POST['phone_number'] ?? ''); 
     $new_password = $_POST['new_password'];
 
@@ -24,34 +26,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($update->execute()) {
         $_SESSION['username'] = $new_username; 
         $success_msg = "Profile updated successfully!";
-        
-        // Update Password only if a non-space value was provided
-        if (!empty(trim($new_password))) {
-            $hashed_pass = password_hash($new_password, PASSWORD_DEFAULT);
-            $pass_stmt = $conn->prepare("UPDATE registrations SET password = ? WHERE id = ?");
-            $pass_stmt->bind_param("si", $hashed_pass, $user_id);
-            if($pass_stmt->execute()) {
-                $success_msg = "Profile and password updated successfully!";
-            } else {
-                $error_msg = "Profile updated, but password failed.";
-            }
-            $pass_stmt->close();
-        }
-    } else {
-        $error_msg = "Failed to update profile. Username might be taken.";
     }
-    $update->close();
+    
+    // Optional: Update Password if they typed something
+    if (!empty($new_password)) {
+        $hashed_pass = password_hash($new_password, PASSWORD_DEFAULT);
+        $pass_stmt = $conn->prepare("UPDATE registrations SET password = ? WHERE id = ?");
+        $pass_stmt->bind_param("si", $hashed_pass, $user_id);
+        $pass_stmt->execute();
+        $success_msg = "Profile and password updated successfully!";
+    }
 }
 
-// Fetch Current Data
+// 4. Fetch Current Data to display in fields
 $stmt = $conn->prepare("SELECT username, email, phone_number FROM registrations WHERE id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $user = $stmt->get_result()->fetch_assoc();
-
-if (!$user) {
-    exit("User data not found.");
-}
 ?>
 
 <!DOCTYPE html>
