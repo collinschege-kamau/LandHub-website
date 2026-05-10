@@ -1,5 +1,5 @@
 <?php
-ob_start(); // Prevents "Headers already sent" errors
+ob_start();
 session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -16,7 +16,17 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $success_msg = "";
 $error_msg = "";
-$redirect_now = false; // Flag for the JS fallback
+$redirect_now = false;
+
+// --- CAPTURE ORIGINAL REFERER ---
+// We only save the referer if it's NOT this current page.
+// This prevents the "loop" where the page redirects to itself.
+if (isset($_SERVER['HTTP_REFERER']) && !str_contains($_SERVER['HTTP_REFERER'], 'profile.php')) {
+    $_SESSION['return_to'] = $_SERVER['HTTP_REFERER'];
+}
+
+// Default fallback if we can't find a referer
+$target_url = isset($_SESSION['return_to']) ? $_SESSION['return_to'] : 'Company Dashboard.php';
 
 // 3. Handle Form Submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -24,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_phone = trim($_POST['phone_number'] ?? ''); 
     $new_password = $_POST['new_password'];
 
-    // Update Basic Info
     $update = $conn->prepare("UPDATE registrations SET username = ?, phone_number = ? WHERE id = ?");
     $update->bind_param("ssi", $new_username, $new_phone, $user_id);
     
@@ -33,7 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $success_msg = "Profile updated successfully! Redirecting...";
         $redirect_now = true;
 
-        // Optional: Update Password if they typed something
         if (!empty($new_password)) {
             $hashed_pass = password_hash($new_password, PASSWORD_DEFAULT);
             $pass_stmt = $conn->prepare("UPDATE registrations SET password = ? WHERE id = ?");
@@ -41,18 +49,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $pass_stmt->execute();
         }
 
-        // Set fallback URL
-        $target_url = 'Company Dashboard.php'; 
-        if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
-            $target_url = $_SERVER['HTTP_REFERER'];
-        }
-        
-        // PHP-level redirect attempt
+        // Trigger the redirect
         header("Refresh: 2; url=" . $target_url);
-    } // This closes the 'if ($update->execute())'
-} // This closes the 'if ($_SERVER["REQUEST_METHOD"] == "POST")'
+        
+        // Clean up the session so it doesn't interfere later
+        unset($_SESSION['return_to']);
+    }
+}
 
-// 4. Fetch Current Data to display in fields
+// 4. Fetch Current Data
 $stmt = $conn->prepare("SELECT username, email, phone_number FROM registrations WHERE id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
