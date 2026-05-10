@@ -35,11 +35,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $pass_stmt = $conn->prepare("UPDATE registrations SET password = ? WHERE id = ?");
         $pass_stmt->bind_param("si", $hashed_pass, $user_id);
         $pass_stmt->execute();
-        $success_msg = "Profile and password updated successfully!";
-
-        $redirect_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'Company Dashboard.php';
-        // Wait 2 seconds so the user sees the success message, then move.
-        header("Refresh: 2; url=" . $redirect_url);
+    }
+        if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
+            $target_url = $_SERVER['HTTP_REFERER'];
+        }
+        
+        // PHP-level redirect attempt
+        header("Refresh: 2; url=" . $target_url);
     }
 }
 
