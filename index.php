@@ -308,7 +308,7 @@
 
         <div class="white-card">
             <div class="notice-box">
-                <i class="fa fa-exclamation-triangle"></i> MAKE SURE YOU HAVE READ "HOW IT WORKS" BEFORE CONTINUING
+                <i class="fa fa-exclamation-triangle"></i> MAKE SURE YOU HAVE READ "<a href="How it works.html"><i class="fa fa-gear"></i> How it Works</a>" BEFORE CONTINUING
             </div>
             <div class="action-buttons">
                 <a href="private sellers upload.html" class="btn-main"><i class="fa fa-user"></i> Buyers/Sellers</a>
