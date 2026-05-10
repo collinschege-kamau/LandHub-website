@@ -123,9 +123,6 @@ $user = $stmt->get_result()->fetch_assoc();
 
         <button type="submit" class="btn-update">SAVE CHANGES</button>
     </form>
-
-    <a href="View Listings.php" class="back-link"><i class="fa fa-arrow-left"></i> Back to Listings Dashboard</a>
-    <a href="Company Dashboard.php" class="back-link"><i class="fa fa-arrow-left"></i> Back to Seller Dashboard</a>
 </div>
 <?php if($redirect_now): ?>
 <script>
